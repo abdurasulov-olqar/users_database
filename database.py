@@ -10,7 +10,7 @@ User = Query()
 def get_by_field(field: str, value: str):
     '''Returns a user by field'''
     return users_table.search(User[field].search(value))
-print(get_by_field("first_name", "Nanice"))
+# print(get_by_field("first_name", "Nanice"))
 
 def get_user_by_id(user_id):
     '''Returns a user by id'''
@@ -38,10 +38,11 @@ def get_user_by_country(country):
     return users_table.search(User.country == country)
 # print(get_user_by_country("Russia"))
 
-# def get_users_full_name(user):
-#     '''Returns a user's full name'''
-#     return users_table.search(User.user == user)
-# print(get_users_full_name("Nanice Quinane"))
+def get_users_full_name(user):
+    '''Returns a user's full name'''
+    full_name = users_table.get(doc_id=user)
+    return f'{full_name["first_name"]} {full_name["last_name"]}'
+print(get_users_full_name("3"))
 
 
 def update_user(user_id, field, value):
